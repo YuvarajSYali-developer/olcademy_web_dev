@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -9,7 +10,7 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
 
-  // Handle scroll effect
+  // Handle scroll effect with enhanced glassmorphic transformation
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -36,12 +37,22 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+    <motion.nav 
+      className={`navbar ${isScrolled ? 'scrolled' : ''}`}
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="nav-container">
-        <Link to="/" className="nav-logo">
-          <span className="logo-icon">🌸</span>
-          <span className="logo-text">PERFUME SHOP</span>
-        </Link>
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
+          <Link to="/" className="nav-logo">
+            <span className="logo-icon">🌸</span>
+            <span className="logo-text">LuxeScent</span>
+          </Link>
+        </motion.div>
         
         {/* Search Bar */}
         <div className="nav-search">
@@ -60,50 +71,65 @@ const Navbar = () => {
         </div>
         
         <div className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
-          <Link 
-            to="/" 
-            className={`nav-link ${isActiveLink('/') ? 'active' : ''}`} 
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Home
-          </Link>
-          <Link 
-            to="/products" 
-            className={`nav-link ${isActiveLink('/products') ? 'active' : ''}`} 
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Products
-          </Link>
-          <Link 
-            to="/" 
-            className={`nav-link ${isActiveLink('/about') ? 'active' : ''}`} 
-            onClick={() => setIsMenuOpen(false)}
-          >
-            About
-          </Link>
-          <Link 
-            to="/" 
-            className={`nav-link ${isActiveLink('/contact') ? 'active' : ''}`} 
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Contact
-          </Link>
+          {['/', '/products', '/about', '/contact'].map((path, index) => {
+            const label = path === '/' ? 'Home' : 
+                         path === '/products' ? 'Products' : 
+                         path === '/about' ? 'About' : 'Contact';
+            return (
+              <motion.div
+                key={path}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.3 }}
+              >
+                <Link 
+                  to={path} 
+                  className={`nav-link ${isActiveLink(path) ? 'active' : ''}`} 
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <motion.span
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    {label}
+                  </motion.span>
+                </Link>
+              </motion.div>
+            );
+          })}
         </div>
 
-        <div className="nav-cart">
+        <motion.div 
+          className="nav-cart"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+        >
           <button className="cart-button">
             <span className="cart-icon">🛒</span>
-            {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
+            {cartCount > 0 && (
+              <motion.span 
+                className="cart-count"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 500, damping: 15 }}
+              >
+                {cartCount}
+              </motion.span>
+            )}
           </button>
-        </div>
+        </motion.div>
 
-        <div className="nav-toggle" onClick={toggleMenu}>
+        <motion.div 
+          className="nav-toggle" 
+          onClick={toggleMenu}
+          whileTap={{ scale: 0.9 }}
+        >
           <span className="bar"></span>
           <span className="bar"></span>
           <span className="bar"></span>
-        </div>
+        </motion.div>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

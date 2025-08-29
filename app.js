@@ -732,3 +732,128 @@ window.shareOnTwitter = shareOnTwitter;
 window.shareOnWhatsApp = shareOnWhatsApp;
 window.copyLink = copyLink;
 window.closeModal = closeModal;
+
+// ...existing code...
+
+// --- Cinematic Hero Section Animation ---
+document.addEventListener('DOMContentLoaded', function() {
+    // ...existing code...
+    cinematicHeroEffects();
+    scentQuizInit();
+    cursorMistEffect();
+    // ...existing code...
+});
+
+// Cinematic Hero: Parallax bottles + vapor mist
+function cinematicHeroEffects() {
+    const hero = document.querySelector('.hero-section');
+    if (!hero) return;
+
+    // Parallax bottle effect
+    hero.addEventListener('mousemove', (e) => {
+        const bottles = hero.querySelectorAll('.hero-bottle');
+        bottles.forEach((bottle, i) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 30 * (i + 1);
+            const y = (e.clientY / window.innerHeight - 0.5) * 30 * (i + 1);
+            bottle.style.transform = `rotateY(${x}deg) rotateX(${-y}deg) scale(1.05)`;
+        });
+    });
+
+    // Vapor mist animation (CSS only, see below)
+}
+
+// --- Glassmorphic Navbar Scroll Effect ---
+window.addEventListener('scroll', function() {
+    const navbar = document.getElementById('navbar');
+    if (navbar) {
+        if (window.scrollY > 50) {
+            navbar.classList.add('navbar-glass');
+        } else {
+            navbar.classList.remove('navbar-glass');
+        }
+    }
+});
+
+// --- Animated Product Cards ---
+function createProductCard(product) {
+    const card = document.createElement('div');
+    card.className = 'product-card cinematic-card';
+
+    // ...existing code...
+
+    card.innerHTML = `
+        <div class="product-card-3d">
+            <img src="${product.images[0]}" alt="${product.name}" class="product-image">
+        </div>
+        <div class="product-card-content">
+            <h3 class="product-card-title">${product.name}</h3>
+            <p class="product-card-description">${product.shortDescription}</p>
+            <div class="product-card-price">$${product.price}</div>
+            <button class="view-details-btn cinematic-btn" type="button">
+                View Details
+            </button>
+        </div>
+    `;
+
+    // 3D hover effect
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
+        const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
+        card.querySelector('.product-card-3d').style.transform = `rotateY(${x}deg) rotateX(${-y}deg) scale(1.04)`;
+    });
+    card.addEventListener('mouseleave', () => {
+        card.querySelector('.product-card-3d').style.transform = '';
+    });
+
+    // ...existing code...
+    return card;
+}
+
+// --- Scent Explorer Quiz ---
+function scentQuizInit() {
+    const quiz = document.getElementById('scent-quiz');
+    if (!quiz) return;
+
+    quiz.addEventListener('click', function(e) {
+        if (e.target.classList.contains('scent-choice')) {
+            const vibe = e.target.dataset.vibe;
+            cinematicMasonryGrid(vibe);
+        }
+    });
+}
+
+// Rearrange product cards based on scent vibe
+function cinematicMasonryGrid(vibe) {
+    const productsGrid = document.getElementById('products-grid');
+    if (!productsGrid) return;
+
+    // Animate grid rearrangement
+    productsGrid.classList.add('masonry-animate');
+    setTimeout(() => {
+        productsGrid.classList.remove('masonry-animate');
+        // Optionally filter products by vibe here
+    }, 700);
+}
+
+// --- Custom Cursor Mist Effect ---
+function cursorMistEffect() {
+    const cursor = document.createElement('div');
+    cursor.className = 'cinematic-cursor';
+    document.body.appendChild(cursor);
+
+    window.addEventListener('mousemove', (e) => {
+        cursor.style.left = `${e.clientX}px`;
+        cursor.style.top = `${e.clientY}px`;
+
+        // Mist particles
+        const mist = document.createElement('div');
+        mist.className = 'cursor-mist';
+        mist.style.left = `${e.clientX + Math.random()*20-10}px`;
+        mist.style.top = `${e.clientY + Math.random()*20-10}px`;
+        document.body.appendChild(mist);
+        setTimeout(() => mist.remove(), 600);
+    });
+}
+
+// ...existing code...

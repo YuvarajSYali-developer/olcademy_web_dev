@@ -16,9 +16,9 @@ const productsData = {
       "inStock": true,
       "featured": true,
       "images": [
-        "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400",
-        "https://images.unsplash.com/photo-1588405748880-12d1d2a59d32?w=400",
-        "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400"
+        "/images/products/pexels-valeriya-965989.jpg",
+        "/images/products/pexels-valeriya-1961791.jpg",
+        "/images/products/pexels-valeriya-724635.jpg"
       ],
       "fragranceNotes": {
         "top": ["Aldehydes", "Bergamot", "Lemon"],
@@ -37,9 +37,9 @@ const productsData = {
       "inStock": true,
       "featured": true,
       "images": [
-        "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400",
-        "https://images.unsplash.com/photo-1565713043848-d6dbcac12f62?w=400",
-        "https://images.unsplash.com/photo-1586041828080-ddac8b528b63?w=400"
+        "/images/products/pexels-valeriya-1961792.jpg",
+        "/images/products/pexels-didsss-1190829.jpg",
+        "/images/products/pexels-pixabay-264950.jpg"
       ],
       "fragranceNotes": {
         "top": ["Bergamot", "Pink Pepper", "Sichuan Pepper"],
@@ -58,9 +58,9 @@ const productsData = {
       "inStock": true,
       "featured": true,
       "images": [
-        "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400",
-        "https://images.unsplash.com/photo-1594736797933-d0f317ba4d12?w=400",
-        "https://images.unsplash.com/photo-1571875257727-256c39da42af?w=400"
+        "/images/products/pexels-mareefe-932577.jpg",
+        "/images/products/pexels-valeriya-965990.jpg",
+        "/images/products/pexels-valeriya-724635.jpg"
       ],
       "fragranceNotes": {
         "top": ["Black Truffle", "Ylang-ylang", "Dark Chocolate"],
@@ -79,9 +79,9 @@ const productsData = {
       "inStock": true,
       "featured": true,
       "images": [
-        "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400",
-        "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=400",
-        "https://images.unsplash.com/photo-1582582494567-0ac5bcb98013?w=400"
+        "/images/products/pexels-valeriya-965989.jpg",
+        "/images/products/pexels-valeriya-1961791.jpg",
+        "/images/products/pexels-pixabay-264950.jpg"
       ],
       "fragranceNotes": {
         "top": ["Iced Accord", "Yuzu", "Pomegranate"],

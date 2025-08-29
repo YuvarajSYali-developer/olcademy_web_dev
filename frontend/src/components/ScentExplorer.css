@@ -1,0 +1,224 @@
+.scent-explorer-container {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+
+.scent-explorer-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.scent-explorer-intro {
+  text-align: center;
+}
+
+.scent-explorer-intro h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, #FFD700, #FF69B4, #9370DB);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+
+.scent-explorer-intro p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.scent-explorer-start-btn {
+  background: linear-gradient(90deg, #FFD700, #FF69B4);
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.scent-explorer-start-btn:hover {
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+}
+
+.quiz-container {
+  padding: 1.5rem;
+}
+
+.quiz-question {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+}
+
+.quiz-options {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.quiz-option {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 1.5rem;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.quiz-option:hover {
+  background: rgba(var(--option-color), 0.2);
+  border-color: var(--option-color);
+  transform: translateY(-5px);
+}
+
+.option-icon {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.option-label {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.quiz-progress {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.progress-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.progress-dot.active {
+  background: #FFD700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+  transform: scale(1.2);
+}
+
+.progress-dot.completed {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.back-button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+  margin: 1.5rem auto 0;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.selected-vibe-indicator {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.selected-vibe-indicator p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.vibe-tag {
+  background: linear-gradient(90deg, #FFD700, #FF69B4);
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: white;
+}
+
+.reset-vibe-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reset-vibe-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .scent-explorer-container {
+    padding: 1.5rem;
+    margin: 2rem 1rem;
+  }
+  
+  .scent-explorer-intro h2 {
+    font-size: 2rem;
+  }
+  
+  .quiz-options {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .quiz-option {
+    width: 100%;
+    max-width: 300px;
+  }
+}

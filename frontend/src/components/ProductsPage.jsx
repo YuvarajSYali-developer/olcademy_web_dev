@@ -19,71 +19,121 @@ const ProductsPage = () => {
       _id: 'fallback-1',
       name: "Chanel No. 5",
       brand: "Chanel",
-      shortDescription: "Timeless floral fragrance with aldehydic bouquet",
+      shortDescription: "Timeless floral fragrance with aldehydic bouquet, featuring notes of ylang-ylang, jasmine, and vanilla.",
+      longDescription: "Chanel No. 5 is perhaps the most famous fragrance in the world. This exquisite perfume features top notes of ylang-ylang and neroli, a floral heart of jasmine and rose, and a warm base of vanilla and sandalwood. A true classic that has stood the test of time.",
       price: 150,
+      rating: 4.8,
+      reviews: 1245,
+      inStock: true,
       images: [
-        "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400",
-        "https://images.unsplash.com/photo-1588405748880-12d1d2a59d32?w=400",
-        "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400"
+        "/PICTURES/pexels-valeriya-965989.jpg",
+        "/PICTURES/pexels-valeriya-1961791.jpg",
+        "/PICTURES/pexels-valeriya-724635.jpg"
       ],
       category: "women",
-      featured: true
+      featured: true,
+      sizes: ["30ml", "50ml", "100ml"],
+      notes: {
+        top: ["Ylang-Ylang", "Neroli", "Aldehydes"],
+        heart: ["Jasmine", "Rose", "Lily of the Valley"],
+        base: ["Vanilla", "Sandalwood", "Vetiver"]
+      }
     },
     {
       _id: 'fallback-2',
       name: "Dior Sauvage",
       brand: "Dior",
-      shortDescription: "Fresh and powerful woody fragrance for men",
+      shortDescription: "Fresh and powerful woody fragrance with citrus and spice accords.",
+      longDescription: "Dior Sauvage is a fresh, spicy, and woody fragrance that captures the spirit of wild, open spaces. With top notes of bergamot, a heart of Sichuan pepper, and a base of ambroxan, it's a modern classic that's both fresh and long-lasting.",
       price: 125,
+      rating: 4.7,
+      reviews: 1890,
+      inStock: true,
       images: [
-        "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400",
-        "https://images.unsplash.com/photo-1565713043848-d6dbcac12f62?w=400",
-        "https://images.unsplash.com/photo-1586041828080-ddac8b528b63?w=400"
+        "/PICTURES/pexels-valeriya-1961792.jpg",
+        "/PICTURES/pexels-didsss-1190829.jpg",
+        "/PICTURES/pexels-pixabay-264950.jpg"
       ],
       category: "men",
-      featured: true
+      featured: true,
+      sizes: ["60ml", "100ml", "200ml"],
+      notes: {
+        top: ["Calabrian Bergamot", "Pepper"],
+        heart: ["Lavender", "Pink Pepper", "Vetiver", "Patchouli", "Elemi"],
+        base: ["Ambroxan", "Cedar"]
+      }
     },
     {
       _id: 'fallback-3',
-      name: "Tom Ford Black Orchid",
+      name: "Black Orchid",
       brand: "Tom Ford",
-      shortDescription: "Luxurious and mysterious unisex fragrance",
+      shortDescription: "Luxurious and mysterious unisex fragrance with dark florals and rich accords.",
+      longDescription: "Tom Ford Black Orchid is a luxurious and sensual unisex fragrance that combines black truffle, ylang-ylang, and black orchid with rich chocolate, patchouli, and incense. This bold and mysterious scent is perfect for evening wear.",
       price: 180,
+      rating: 4.6,
+      reviews: 956,
+      inStock: true,
       images: [
-        "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400",
-        "https://images.unsplash.com/photo-1594736797933-d0f317ba4d12?w=400",
-        "https://images.unsplash.com/photo-1571875257727-256c39da42af?w=400"
+        "/PICTURES/pexels-valeriya-965990.jpg",
+        "/PICTURES/pexels-valeriya-724635.jpg",
+        "/PICTURES/pexels-mareefe-932577.jpg"
       ],
       category: "unisex",
-      featured: true
+      featured: true,
+      sizes: ["50ml", "100ml"],
+      notes: {
+        top: ["Truffle", "Ylang-Ylang", "Bergamot", "Mandarin"],
+        heart: ["Black Orchid", "Lotus Wood", "Frangipani", "Spices"],
+        base: ["Patchouli", "Vanilla", "Incense", "Sandalwood", "Chocolate", "Amber", "Vetiver"]
+      }
     },
     {
       _id: 'fallback-4',
-      name: "Versace Bright Crystal",
+      name: "Bright Crystal",
       brand: "Versace",
-      shortDescription: "Light and fruity fragrance with floral notes",
+      shortDescription: "Light and fruity fragrance with pomegranate and peony notes.",
+      longDescription: "Versace Bright Crystal is a fresh, sensual, and vibrant floral fruity fragrance. The top notes of pomegranate and yuzu blend with peony, magnolia, and lotus flower, resting on a base of amber and musk for a sparkling, luminous effect.",
       price: 95,
+      rating: 4.5,
+      reviews: 2345,
+      inStock: true,
       images: [
-        "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400",
-        "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=400",
-        "https://images.unsplash.com/photo-1582582494567-0ac5bcb98013?w=400"
+        "/PICTURES/pexels-mareefe-932577.jpg",
+        "/PICTURES/pexels-valeriya-1961791.jpg",
+        "/PICTURES/pexels-valeriya-965989.jpg"
       ],
       category: "women",
-      featured: false
+      featured: true,
+      sizes: ["30ml", "50ml", "90ml"],
+      notes: {
+        top: ["Yuzu", "Pomegranate"],
+        heart: ["Peony", "Magnolia", "Lotus Flower"],
+        base: ["Amber", "Mahogany", "Musk"]
+      }
     },
     {
       _id: 'fallback-5',
       name: "Armani Code",
       brand: "Giorgio Armani",
-      shortDescription: "Sophisticated oriental fragrance for men",
+      shortDescription: "Sophisticated oriental fragrance with lemon and olive blossom.",
+      longDescription: "Armani Code is a sophisticated oriental fragrance for men that combines fresh lemon and bergamot with olive blossom and star anise. The heart reveals guaiac wood and tonka bean, while the base features leather and tobacco notes for a sensual finish.",
       price: 110,
+      rating: 4.4,
+      reviews: 1780,
+      inStock: true,
       images: [
-        "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=400",
-        "https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=400",
-        "https://images.unsplash.com/photo-1574705710642-d0dd5c3e3d0a?w=400"
+        "/PICTURES/pexels-pixabay-264950.jpg",
+        "/PICTURES/pexels-didsss-1190829.jpg",
+        "/PICTURES/pexels-valeriya-1961792.jpg"
       ],
       category: "men",
-      featured: false
+      featured: true,
+      sizes: ["50ml", "100ml", "150ml"],
+      notes: {
+        top: ["Lemon", "Bergamot"],
+        heart: ["Olive Blossom", "Star Anise"],
+        base: ["Guaiac Wood", "Tobacco", "Leather", "Tonka Bean"]
+      }
     }
   ];
 

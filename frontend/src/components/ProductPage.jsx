@@ -33,9 +33,9 @@ const ProductPage = () => {
     inStock: true,
     featured: true,
     images: [
-      "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400",
-      "https://images.unsplash.com/photo-1588405748880-12d1d2a59d32?w=400",
-      "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400"
+      "/PICTURES/pexels-valeriya-965989.jpg",
+      "/PICTURES/pexels-valeriya-1961791.jpg",
+      "/PICTURES/pexels-valeriya-724635.jpg"
     ],
     fragranceNotes: {
       top: ["Aldehydes", "Bergamot", "Lemon"],
@@ -208,19 +208,27 @@ const ProductPage = () => {
           <div className="product-images">
             <div className="main-image">
               <img 
-                src={product.images[currentImageIndex]} 
+                src={product.images[currentImageIndex] || '/PICTURES/pexels-valeriya-965989.jpg'} 
                 alt={product.name} 
                 className="product-main-image"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = '/PICTURES/pexels-valeriya-965989.jpg';
+                }}
               />
             </div>
             <div className="image-thumbnails">
               {product.images.map((image, index) => (
                 <img
                   key={index}
-                  src={image}
+                  src={image || `/PICTURES/pexels-valeriya-${965989 + index}.jpg`}
                   alt={`${product.name} ${index + 1}`}
                   className={`thumbnail ${index === currentImageIndex ? 'active' : ''}`}
                   onClick={() => handleImageChange(index)}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = `/PICTURES/pexels-valeriya-${965989 + index}.jpg`;
+                  }}
                 />
               ))}
             </div>

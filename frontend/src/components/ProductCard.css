@@ -1,18 +1,44 @@
 /* Product Card Styles */
 .product-card {
   background: white;
-  border-radius: 20px;
+  border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: all 0.4s ease;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.05);
   position: relative;
-  border: 2px solid transparent;
 }
 
 .product-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 25px 60px rgba(15, 76, 92, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  border-color: rgba(139, 90, 43, 0.3);
+}
+
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(139, 90, 43, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.product-card:hover::before {
+  opacity: 1;
+}
+
+.product-card.hovered {
   border-color: #FFD700;
+  box-shadow: 0 25px 60px rgba(15, 76, 92, 0.3), 0 0 30px rgba(255, 215, 0, 0.3);
 }
 
 /* Grid View Styles */
@@ -59,15 +85,54 @@
 .product-image-container {
   position: relative;
   overflow: hidden;
-  height: 280px;
+  height: 250px;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+/* 3D Container Styles */
+.product-3d-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.product-3d-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  outline: none;
+  transform-style: preserve-3d;
+}
+
+/* Modal 3D Container */
+.modal-product-3d-container {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.modal-product-3d-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  outline: none;
 }
 
 .product-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: transform 0.5s ease;
+  filter: brightness(0.95);
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+  filter: brightness(1.05);
 }
 
 .product-card:hover .product-image {
@@ -137,6 +202,12 @@
 /* Product Info */
 .product-info {
   padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 15%);
 }
 
 .product-brand {
@@ -159,6 +230,18 @@
   font-weight: 600;
   font-family: 'Playfair Display', serif;
   transition: color 0.3s ease;
+}
+
+.product-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+  transition: color 0.3s ease;
+}
+
+.product-card:hover .product-title {
+  color: #8b5a2b;
 }
 
 .product-name a:hover {
@@ -192,10 +275,22 @@
 }
 
 .product-price {
-  color: #E34234;
+  color: #8b5a2b;
   font-size: 1.4rem;
   font-weight: 700;
   font-family: 'Playfair Display', serif;
+  display: inline-block;
+  position: relative;
+}
+
+.product-price::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, #8b5a2b, transparent);
 }
 
 /* Product Actions */
@@ -206,7 +301,7 @@
 
 .add-to-cart-btn {
   flex: 1;
-  background: linear-gradient(135deg, #0F4C5C 0%, #1520A6 100%);
+  background: linear-gradient(135deg, #8b5a2b 0%, #a67c52 100%);
   color: white;
   border: none;
   padding: 12px 20px;
@@ -216,12 +311,13 @@
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  box-shadow: 0 4px 15px rgba(15, 76, 92, 0.3);
+  box-shadow: 0 4px 15px rgba(139, 90, 43, 0.3);
 }
 
 .add-to-cart-btn:hover {
+  background: linear-gradient(135deg, #a67c52 0%, #8b5a2b 100%);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(15, 76, 92, 0.4);
+  box-shadow: 0 6px 20px rgba(139, 90, 43, 0.4);
 }
 
 .wishlist-btn {

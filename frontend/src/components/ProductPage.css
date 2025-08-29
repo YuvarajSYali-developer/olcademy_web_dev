@@ -1,7 +1,12 @@
 .product-page {
   padding: 2rem 0;
-  background: #f8f9fa;
+  background-image: linear-gradient(rgba(248, 249, 250, 0.95), rgba(248, 249, 250, 0.95)), url('/PICTURES/pexels-valeriya-724635.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .product-layout {

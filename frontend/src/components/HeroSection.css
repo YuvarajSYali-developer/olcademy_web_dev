@@ -6,8 +6,19 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: linear-gradient(135deg, #0c0c0c 0%, #0F4C5C 30%, #1520A6 70%, #6A0DAD 100%);
   width: 100%;
+  background-repeat: no-repeat !important;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4));
+  z-index: 5;
+  pointer-events: none;
 }
 
 .hero-content {
@@ -21,47 +32,51 @@
 
 .hero-title {
   font-family: 'Playfair Display', serif;
-  font-size: 4.5rem;
-  font-weight: 600;
+  font-size: 5rem;
+  font-weight: 700;
   margin-bottom: 2rem;
-  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
   animation: fadeInUp 1.2s ease-out;
   background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #E34234 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   line-height: 1.2;
+  letter-spacing: 1px;
 }
 
 .hero-subtitle {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   margin-bottom: 2.5rem;
-  opacity: 0.95;
+  opacity: 1;
   line-height: 1.7;
   animation: fadeInUp 1.2s ease-out 0.4s both;
-  color: #f8f9fa;
-  font-weight: 300;
+  color: #ffffff;
+  font-weight: 400;
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.5px;
 }
 
 .hero-cta {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-  color: #212529;
-  border: none;
-  padding: 1.2rem 3rem;
-  font-size: 1.2rem;
+  background: linear-gradient(135deg, #d4af37 0%, #f9d342 50%, #b88a44 100%);
+  color: #000;
+  font-size: 1.3rem;
   font-weight: 600;
+  padding: 1.2rem 3rem;
+  border: none;
   border-radius: 50px;
   cursor: pointer;
-  transition: all 0.4s ease;
-  box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
   animation: fadeInUp 1.2s ease-out 0.8s both;
-  text-transform: uppercase;
-  letter-spacing: 1px;
   position: relative;
   overflow: hidden;
+  z-index: 1;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .hero-cta::before {
@@ -82,7 +97,8 @@
 
 .hero-cta:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 50px rgba(255, 215, 0, 0.6);
+  box-shadow: 0 12px 30px rgba(212, 175, 55, 0.6);
+  background: linear-gradient(135deg, #b88a44 0%, #f9d342 50%, #d4af37 100%);
   color: #212529;
 }
 
@@ -101,7 +117,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.7) 100%);
+  pointer-events: none;
   z-index: 5;
 }
 

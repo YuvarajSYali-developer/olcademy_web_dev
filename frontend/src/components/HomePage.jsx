@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+// Removed unused transition group imports
 import HeroSection from './HeroSection';
 import ProductCard from './ProductCard';
+import ScentExplorer from './ScentExplorer';
 import './HomePage.css';
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedVibe, setSelectedVibe] = useState(null);
 
   // Enhanced fallback data with more exotic perfumes
   const fallbackProducts = [
@@ -18,9 +23,9 @@ const HomePage = () => {
       shortDescription: "Timeless floral fragrance with aldehydic bouquet",
       price: 150,
       images: [
-        "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400",
-        "https://images.unsplash.com/photo-1588405748880-12d1d2a59d32?w=400",
-        "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400"
+        "/PICTURES/pexels-valeriya-965989.jpg",
+        "/PICTURES/pexels-valeriya-1961791.jpg",
+        "/PICTURES/pexels-valeriya-724635.jpg"
       ],
       category: "women",
       featured: true
@@ -32,9 +37,9 @@ const HomePage = () => {
       shortDescription: "Fresh and powerful woody fragrance for men",
       price: 125,
       images: [
-        "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400",
-        "https://images.unsplash.com/photo-1565713043848-d6dbcac12f62?w=400",
-        "https://images.unsplash.com/photo-1586041828080-ddac8b528b63?w=400"
+        "/PICTURES/pexels-valeriya-1961792.jpg",
+        "/PICTURES/pexels-didsss-1190829.jpg",
+        "/PICTURES/pexels-pixabay-264950.jpg"
       ],
       category: "men",
       featured: true
@@ -46,9 +51,9 @@ const HomePage = () => {
       shortDescription: "Luxurious and mysterious unisex fragrance",
       price: 180,
       images: [
-        "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400",
-        "https://images.unsplash.com/photo-1594736797933-d0f317ba4d12?w=400",
-        "https://images.unsplash.com/photo-1571875257727-256c39da42af?w=400"
+        "/PICTURES/pexels-valeriya-965990.jpg",
+        "/PICTURES/pexels-valeriya-724635.jpg",
+        "/PICTURES/pexels-mareefe-932577.jpg"
       ],
       category: "unisex",
       featured: true
@@ -60,9 +65,9 @@ const HomePage = () => {
       shortDescription: "Light and fruity fragrance with floral notes",
       price: 95,
       images: [
-        "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400",
-        "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=400",
-        "https://images.unsplash.com/photo-1582582494567-0ac5bcb98013?w=400"
+        "/PICTURES/pexels-mareefe-932577.jpg",
+        "/PICTURES/pexels-valeriya-1961791.jpg",
+        "/PICTURES/pexels-valeriya-965989.jpg"
       ],
       category: "women",
       featured: true
@@ -74,9 +79,9 @@ const HomePage = () => {
       shortDescription: "Sophisticated oriental fragrance for men",
       price: 110,
       images: [
-        "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=400",
-        "https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=400",
-        "https://images.unsplash.com/photo-1574705710642-d0dd5c3e3d0a?w=400"
+        "/PICTURES/pexels-pixabay-264950.jpg",
+        "/PICTURES/pexels-didsss-1190829.jpg",
+        "/PICTURES/pexels-valeriya-1961792.jpg"
       ],
       category: "men",
       featured: true
@@ -86,6 +91,47 @@ const HomePage = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
+  
+  // Filter products when vibe changes
+  useEffect(() => {
+    if (!products.length) return;
+    
+    if (!selectedVibe) {
+      setFilteredProducts(products);
+      return;
+    }
+    
+    // Filter logic based on vibe
+    const filterByVibe = (vibe, mainVibe) => {
+      // Map vibes to product categories and characteristics
+      const vibeMap = {
+        // Energetic vibes
+        'energetic': product => product.category === 'men' || product.shortDescription.toLowerCase().includes('fresh'),
+        'fresh': product => product.shortDescription.toLowerCase().includes('fresh') || product.shortDescription.toLowerCase().includes('citrus'),
+        'sporty': product => product.category === 'men' && product.shortDescription.toLowerCase().includes('fresh'),
+        'vibrant': product => product.shortDescription.toLowerCase().includes('vibrant') || product.shortDescription.toLowerCase().includes('energetic'),
+        
+        // Romantic vibes
+        'romantic': product => product.category === 'women' || product.shortDescription.toLowerCase().includes('floral'),
+        'delicate': product => product.shortDescription.toLowerCase().includes('floral') || product.shortDescription.toLowerCase().includes('light'),
+        'warm': product => product.shortDescription.toLowerCase().includes('warm') || product.shortDescription.toLowerCase().includes('sweet'),
+        'sweet': product => product.shortDescription.toLowerCase().includes('sweet') || product.shortDescription.toLowerCase().includes('fruity'),
+        
+        // Mysterious vibes
+        'mysterious': product => product.category === 'unisex' || product.shortDescription.toLowerCase().includes('mysterious'),
+        'intriguing': product => product.shortDescription.toLowerCase().includes('mysterious') || product.shortDescription.toLowerCase().includes('exotic'),
+        'deep': product => product.shortDescription.toLowerCase().includes('deep') || product.shortDescription.toLowerCase().includes('rich'),
+        'exotic': product => product.shortDescription.toLowerCase().includes('exotic') || product.shortDescription.toLowerCase().includes('spicy')
+      };
+      
+      // Use specific vibe filter or fallback to main vibe
+      const filterFn = vibeMap[vibe] || vibeMap[mainVibe] || (() => true);
+      return products.filter(filterFn);
+    };
+    
+    const filtered = filterByVibe(selectedVibe.detailedVibe, selectedVibe.mainVibe);
+    setFilteredProducts(filtered.length ? filtered : products); // Fallback to all products if no matches
+  }, [selectedVibe, products]);
 
   const fetchProducts = async () => {
     try {
@@ -97,10 +143,18 @@ const HomePage = () => {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
       const data = await response.json();
-      setProducts(data);
+      if (data && data.length > 0) {
+        setProducts(data);
+        setFilteredProducts(data);
+      } else {
+        console.warn('No products returned from backend, using fallback data');
+        setProducts(fallbackProducts);
+        setFilteredProducts(fallbackProducts);
+      }
     } catch (err) {
       console.warn('Failed to fetch products from backend, using fallback data:', err.message);
       setProducts(fallbackProducts);
+      setFilteredProducts(fallbackProducts);
       setError('Backend connection failed, showing demo products');
     } finally {
       setLoading(false);
@@ -119,6 +173,27 @@ const HomePage = () => {
   const featuredProducts = products.filter(product => product.featured);
   const allProducts = products.length > 0 ? products : fallbackProducts;
 
+    const handleVibeSelect = (detailedVibe, mainVibe) => {
+    if (!detailedVibe) {
+      setSelectedVibe(null);
+      return;
+    }
+    
+    setSelectedVibe({
+      detailedVibe,
+      mainVibe
+    });
+    
+    // Scroll to products section with animation
+    const productsSection = document.getElementById('products-section');
+    if (productsSection) {
+      window.scrollTo({
+        top: productsSection.offsetTop - 100,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <div className="homepage">
       <HeroSection />
@@ -132,19 +207,56 @@ const HomePage = () => {
         </div>
       )}
       
-      <section className="featured-products">
+      {/* Scent Explorer Quiz */}
+      <section className="scent-explorer-section">
+        <ScentExplorer onVibeSelect={handleVibeSelect} />
+      </section>
+      
+      <section id="products-section" className="featured-products">
         <div className="container">
-          <h2 className="section-title">Featured Fragrances</h2>
-          <p className="section-subtitle">
-            Discover our most prestigious and luxurious fragrances from world-renowned brands
-          </p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="section-title">Featured Fragrances</h2>
+            <p className="section-subtitle">
+              {selectedVibe 
+                ? `Curated ${selectedVibe.detailedVibe} fragrances for your ${selectedVibe.mainVibe} mood` 
+                : 'Discover our most prestigious and luxurious fragrances from world-renowned brands'}
+            </p>
+          </motion.div>
           
           <div className="products-grid">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product._id} product={product} />
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.1
+                  }
+                }
+              }}
+            >
+            {(selectedVibe ? filteredProducts : featuredProducts).map((product) => (
+              <motion.div
+                key={product._id}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                exit={{ opacity: 0, y: -20 }}
+                layout
+                className="product-item"
+              >
+                <ProductCard product={product} />
+              </motion.div>
             ))}
+            </motion.div>
           </div>
-          
           <div className="view-all-container">
             <Link to="/products" className="view-all-button">
               Explore All Collections

@@ -44,17 +44,29 @@
     <main id="main-content">
         <!-- Homepage -->
         <div id="homepage" class="page">
-            <!-- Hero Section -->
-            <section class="hero">
+            <!-- Cinematic Hero Section -->
+            <section class="hero-section">
+                <!-- Cinematic floating bottles -->
+                <div class="hero-bottle" style="left:50%;top:50%;"></div>
+                <div class="hero-bottle" style="left:60%;top:55%;"></div>
+                <div class="hero-bottle" style="left:40%;top:45%;"></div>
+                <!-- Vapor mist effect -->
+                <div class="hero-vapor"></div>
                 <div class="hero-content">
-                    <h1 class="hero-title">Discover Your Signature Scent</h1>
+                    <h1 class="hero-title">Discover Your Scent Identity</h1>
                     <p class="hero-subtitle">Premium fragrances for the discerning individual</p>
-                    <button class="btn btn--primary btn--lg hero-cta" onclick="scrollToProducts()">
-                        Explore Collections
+                    <button class="cinematic-btn hero-cta" onclick="scrollToProducts()">
+                        Shop Now
                     </button>
                 </div>
-                <div class="hero-background"></div>
             </section>
+
+            <!-- Scent Explorer Quiz -->
+            <div id="scent-quiz">
+                <div class="scent-choice" data-vibe="Energetic">Energetic</div>
+                <div class="scent-choice" data-vibe="Romantic">Romantic</div>
+                <div class="scent-choice" data-vibe="Mysterious">Mysterious</div>
+            </div>
 
             <!-- Featured Products Section -->
             <section class="products-section" id="products-section">

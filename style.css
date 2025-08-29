@@ -1568,3 +1568,121 @@ h1, h2, h3, h4, h5, h6 {
     flex-wrap: wrap;
   }
 }
+
+/* Glassmorphic Navbar */
+.navbar-glass {
+    background: rgba(30,30,40,0.7);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 24px rgba(80,80,120,0.08);
+    transition: background 0.4s, box-shadow 0.4s;
+}
+
+/* Cinematic Hero Section */
+.hero-section {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+}
+.hero-bottle {
+    position: absolute;
+    width: 120px;
+    height: 220px;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s cubic-bezier(.25,.8,.25,1);
+    box-shadow: 0 8px 32px #e0c3fc80;
+    filter: drop-shadow(0 0 24px #fff8);
+}
+.hero-vapor {
+    position: absolute;
+    width: 100vw; height: 100vh;
+    pointer-events: none;
+    background: radial-gradient(circle at 60% 40%, #fff8 0%, transparent 70%);
+    opacity: 0.5;
+    animation: vaporFlow 6s infinite linear;
+}
+@keyframes vaporFlow {
+    0% { transform: translateY(0);}
+    100% { transform: translateY(-40px);}
+}
+
+/* Cinematic Product Card */
+.cinematic-card {
+    background: rgba(255,255,255,0.7);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px #e0c3fc80;
+    transition: box-shadow 0.3s;
+    overflow: hidden;
+    position: relative;
+}
+.product-card-3d {
+    transition: transform 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.cinematic-btn {
+    background: linear-gradient(90deg,#a78bfa,#e0c3fc);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    box-shadow: 0 0 16px #e0c3fc80;
+    transition: box-shadow 0.2s, background 0.2s;
+}
+.cinematic-btn:hover {
+    box-shadow: 0 0 32px #e0c3fc;
+    background: linear-gradient(90deg,#e0c3fc,#a78bfa);
+}
+
+/* Scent Quiz */
+#scent-quiz {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    margin: 32px 0;
+}
+.scent-choice {
+    padding: 16px 32px;
+    border-radius: 999px;
+    background: linear-gradient(90deg,#fbc2eb,#a6c1ee);
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 16px #e0c3fc40;
+    transition: background 0.2s;
+}
+.scent-choice:hover {
+    background: linear-gradient(90deg,#a6c1ee,#fbc2eb);
+}
+
+/* Masonry Animation */
+.masonry-animate {
+    animation: masonryGrid 0.7s cubic-bezier(.25,.8,.25,1);
+}
+@keyframes masonryGrid {
+    0% { transform: scale(0.96) rotate(-2deg);}
+    60% { transform: scale(1.04) rotate(2deg);}
+    100% { transform: scale(1) rotate(0);}
+}
+
+/* Custom Cursor Mist */
+.cinematic-cursor {
+    position: fixed;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: radial-gradient(circle,#e0c3fc 60%,transparent 100%);
+    pointer-events: none;
+    z-index: 9999;
+    box-shadow: 0 0 24px 8px #e0c3fc80;
+    transition: transform 0.1s;
+}
+.cursor-mist {
+    position: fixed;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: radial-gradient(circle,#e0c3fc44 60%,transparent 100%);
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.7;
+    animation: mistFade 0.6s linear forwards;
+}
+@keyframes mistFade {
+    0% { opacity: 0.7;}
+    100% { opacity: 0; transform: scale(1.8);}
+}
