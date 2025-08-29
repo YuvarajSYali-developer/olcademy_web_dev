@@ -9,7 +9,7 @@ const HomePage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fallback data when backend is not available
+  // Enhanced fallback data with more exotic perfumes
   const fallbackProducts = [
     {
       _id: 'fallback-1',
@@ -52,6 +52,34 @@ const HomePage = () => {
       ],
       category: "unisex",
       featured: true
+    },
+    {
+      _id: 'fallback-4',
+      name: "Versace Bright Crystal",
+      brand: "Versace",
+      shortDescription: "Light and fruity fragrance with floral notes",
+      price: 95,
+      images: [
+        "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400",
+        "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=400",
+        "https://images.unsplash.com/photo-1582582494567-0ac5bcb98013?w=400"
+      ],
+      category: "women",
+      featured: true
+    },
+    {
+      _id: 'fallback-5',
+      name: "Armani Code",
+      brand: "Giorgio Armani",
+      shortDescription: "Sophisticated oriental fragrance for men",
+      price: 110,
+      images: [
+        "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=400",
+        "https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=400",
+        "https://images.unsplash.com/photo-1574705710642-d0dd5c3e3d0a?w=400"
+      ],
+      category: "men",
+      featured: true
     }
   ];
 
@@ -89,6 +117,7 @@ const HomePage = () => {
   }
 
   const featuredProducts = products.filter(product => product.featured);
+  const allProducts = products.length > 0 ? products : fallbackProducts;
 
   return (
     <div className="homepage">
@@ -107,7 +136,7 @@ const HomePage = () => {
         <div className="container">
           <h2 className="section-title">Featured Fragrances</h2>
           <p className="section-subtitle">
-            Discover our most popular and luxurious fragrances
+            Discover our most prestigious and luxurious fragrances from world-renowned brands
           </p>
           
           <div className="products-grid">
@@ -117,9 +146,48 @@ const HomePage = () => {
           </div>
           
           <div className="view-all-container">
-            <Link to="/" className="view-all-button">
-              View All Products
+            <Link to="/products" className="view-all-button">
+              Explore All Collections
             </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="exotic-collection">
+        <div className="container">
+          <h2 className="section-title">Exotic Collection</h2>
+          <p className="section-subtitle">
+            Journey through rare and mysterious fragrances that tell stories of distant lands
+          </p>
+          
+          <div className="exotic-content">
+            <div className="exotic-text">
+              <h3>Discover the World Through Scent</h3>
+              <p>
+                Our exotic collection features fragrances inspired by the most captivating destinations 
+                and cultures around the globe. From the spice markets of Marrakech to the cherry blossoms 
+                of Kyoto, each scent is a passport to adventure and discovery.
+              </p>
+              <div className="exotic-features">
+                <div className="feature">
+                  <span className="feature-icon">🌍</span>
+                  <span>Global Inspiration</span>
+                </div>
+                <div className="feature">
+                  <span className="feature-icon">✨</span>
+                  <span>Rare Ingredients</span>
+                </div>
+                <div className="feature">
+                  <span className="feature-icon">🎭</span>
+                  <span>Cultural Stories</span>
+                </div>
+              </div>
+            </div>
+            <div className="exotic-image">
+              <div className="image-placeholder">
+                <span className="placeholder-text">Exotic Fragrances</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -127,22 +195,55 @@ const HomePage = () => {
       <section className="categories-section">
         <div className="container">
           <h2 className="section-title">Shop by Category</h2>
+          <p className="section-subtitle">
+            Find your perfect fragrance based on your style and preferences
+          </p>
           <div className="categories-grid">
             <div className="category-card">
               <div className="category-icon">👩</div>
               <h3>Women's Fragrances</h3>
-              <p>Elegant and sophisticated scents</p>
+              <p>Elegant and sophisticated scents that embody femininity and grace</p>
+              <Link to="/products?category=women" className="category-link">
+                Explore Collection →
+              </Link>
             </div>
             <div className="category-card">
               <div className="category-icon">👨</div>
               <h3>Men's Fragrances</h3>
-              <p>Bold and masculine aromas</p>
+              <p>Bold and masculine aromas that define modern masculinity</p>
+              <Link to="/products?category=men" className="category-link">
+                Explore Collection →
+              </Link>
             </div>
             <div className="category-card">
               <div className="category-icon">⚧</div>
               <h3>Unisex Fragrances</h3>
-              <p>Versatile and unique scents</p>
+              <p>Versatile and unique scents that transcend traditional boundaries</p>
+              <Link to="/products?category=unisex" className="category-link">
+                Explore Collection →
+              </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="latest-products">
+        <div className="container">
+          <h2 className="section-title">Latest Arrivals</h2>
+          <p className="section-subtitle">
+            Be the first to experience our newest fragrance discoveries
+          </p>
+          
+          <div className="products-grid">
+            {allProducts.slice(0, 4).map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
+          </div>
+          
+          <div className="view-all-container">
+            <Link to="/products" className="view-all-button">
+              View All Products
+            </Link>
           </div>
         </div>
       </section>

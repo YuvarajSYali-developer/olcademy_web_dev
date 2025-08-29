@@ -1,3 +1,6 @@
+/* Import Google Fonts for exotic typography */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
 /* Reset and base styles */
 * {
   margin: 0;
@@ -5,27 +8,36 @@
   box-sizing: border-box;
 }
 
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
-  color: #333;
+  color: #2c3e50;
   background-color: #f8f9fa;
+  width: 100%;
 }
 
 .App {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 main {
   flex: 1;
+  width: 100%;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
+  width: 100%;
 }
 
 /* Loading and error states */
@@ -43,7 +55,7 @@ main {
   width: 50px;
   height: 50px;
   border: 4px solid #f3f3f3;
-  border-top: 4px solid #007bff;
+  border-top: 4px solid #0F4C5C;
   border-radius: 50%;
   animation: spin 1s linear infinite;
   margin-bottom: 20px;
@@ -56,36 +68,40 @@ main {
 
 .retry-button,
 .back-button {
-  background-color: #007bff;
+  background: linear-gradient(135deg, #0F4C5C 0%, #1520A6 100%);
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 12px 24px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
+  font-weight: 500;
   margin-top: 20px;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(15, 76, 92, 0.3);
 }
 
 .retry-button:hover,
 .back-button:hover {
-  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(15, 76, 92, 0.4);
 }
 
 /* Warning banner */
 .warning-banner {
-  background-color: #fff3cd;
-  border: 1px solid #ffeaa7;
+  background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+  border: 1px solid #FFD700;
   color: #856404;
   padding: 15px 20px;
   margin: 20px auto;
-  max-width: 1200px;
-  border-radius: 5px;
+  max-width: 1400px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 15px;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
 }
 
 .warning-banner p {
@@ -95,30 +111,36 @@ main {
 
 .warning-banner .retry-button {
   margin: 0;
-  background-color: #ffc107;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
   color: #212529;
-  border: 1px solid #ffc107;
+  border: 1px solid #FFD700;
 }
 
 .warning-banner .retry-button:hover {
-  background-color: #e0a800;
-  border-color: #d39e00;
+  background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
+  border-color: #FFA500;
 }
 
 /* Section titles */
 .section-title {
-  font-size: 2.5rem;
-  font-weight: 300;
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 600;
   text-align: center;
-  margin-bottom: 10px;
-  color: #2c3e50;
+  margin-bottom: 15px;
+  color: #0F4C5C;
+  text-shadow: 2px 2px 4px rgba(15, 76, 92, 0.1);
 }
 
 .section-subtitle {
   text-align: center;
-  color: #7f8c8d;
-  font-size: 1.1rem;
-  margin-bottom: 40px;
+  color: #6A0DAD;
+  font-size: 1.2rem;
+  margin-bottom: 50px;
+  font-weight: 400;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Responsive design */
@@ -128,15 +150,25 @@ main {
   }
   
   .section-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
   
   .section-subtitle {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
   
   .warning-banner {
     flex-direction: column;
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1rem;
   }
 }

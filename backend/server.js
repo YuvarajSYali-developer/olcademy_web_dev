@@ -16,6 +16,9 @@ const connectDB = async () => {
     // Try local MongoDB first
     await mongoose.connect('mongodb://localhost:27017/perfume_shop');
     console.log('✅ Connected to local MongoDB');
+    
+    // Log final status after connection
+    console.log(`📊 Final Database status: ${mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected'}`);
   } catch (localError) {
     console.log('⚠️  Local MongoDB connection failed, trying MongoDB Atlas...');
     try {
@@ -131,6 +134,6 @@ if (process.env.NODE_ENV === 'production') {
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📊 Database status: ${mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected'}`);
   console.log(`🌐 Health check: http://localhost:${PORT}/api/health`);
+  console.log(`📊 Initial Database status: ${mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected'}`);
 });

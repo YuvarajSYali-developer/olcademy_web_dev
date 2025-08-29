@@ -12,6 +12,13 @@ const ProductPage = () => {
   const [selectedSize, setSelectedSize] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [newReview, setNewReview] = useState({
+    userName: '',
+    userEmail: '',
+    rating: 5,
+    comment: ''
+  });
 
   // Fallback product data for demo purposes
   const fallbackProduct = {
@@ -77,7 +84,6 @@ const ProductPage = () => {
       }
     } catch (err) {
       console.warn('Failed to fetch reviews:', err);
-      // Set empty reviews array if backend fails
       setReviews([]);
     }
   };
@@ -87,12 +93,81 @@ const ProductPage = () => {
       alert('Please select a size');
       return;
     }
-    // Add to cart logic here
-    alert('Added to cart!');
+    alert(`Added ${quantity}x ${product.name} (${selectedSize}) to cart!`);
   };
 
   const handleImageChange = (index) => {
     setCurrentImageIndex(index);
+  };
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: product.name,
+          text: `Check out ${product.name} by ${product.brand} - ${product.shortDescription}`,
+          url: window.location.href,
+        });
+      } catch (err) {
+        console.log('Error sharing:', err);
+      }
+    } else {
+      // Fallback for browsers that don't support Web Share API
+      const shareData = {
+        title: product.name,
+        text: `Check out ${product.name} by ${product.brand}`,
+        url: window.location.href,
+      };
+      
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Link copied to clipboard!');
+      } else {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = window.location.href;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        alert('Link copied to clipboard!');
+      }
+    }
+  };
+
+  const handleReviewSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!newReview.userName || !newReview.userEmail || !newReview.comment) {
+      alert('Please fill in all fields');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:5000/api/reviews', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...newReview,
+          productId: product._id,
+        }),
+      });
+
+      if (response.ok) {
+        const savedReview = await response.json();
+        setReviews([...reviews, savedReview]);
+        setNewReview({ userName: '', userEmail: '', rating: 5, comment: '' });
+        setShowReviewForm(false);
+        alert('Review submitted successfully!');
+      } else {
+        throw new Error('Failed to submit review');
+      }
+    } catch (err) {
+      console.error('Error submitting review:', err);
+      alert('Failed to submit review. Please try again.');
+    }
   };
 
   if (loading) {
@@ -157,6 +232,11 @@ const ProductPage = () => {
               <h1 className="product-title">{product.name}</h1>
               <div className="product-brand">{product.brand}</div>
               <div className="product-price">${product.price}</div>
+              
+              {/* Share Button */}
+              <button onClick={handleShare} className="share-button">
+                📤 Share Product
+              </button>
             </div>
 
             <div className="product-description">
@@ -248,7 +328,74 @@ const ProductPage = () => {
 
         {/* Reviews Section */}
         <div className="reviews-section">
-          <h2>Customer Reviews</h2>
+          <div className="reviews-header">
+            <h2>Customer Reviews</h2>
+            <button 
+              onClick={() => setShowReviewForm(!showReviewForm)}
+              className="add-review-btn"
+            >
+              {showReviewForm ? 'Cancel' : '✍️ Write a Review'}
+            </button>
+          </div>
+
+          {/* Review Form */}
+          {showReviewForm && (
+            <div className="review-form-container">
+              <form onSubmit={handleReviewSubmit} className="review-form">
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>Name:</label>
+                    <input
+                      type="text"
+                      value={newReview.userName}
+                      onChange={(e) => setNewReview({...newReview, userName: e.target.value})}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Email:</label>
+                    <input
+                      type="email"
+                      value={newReview.userEmail}
+                      onChange={(e) => setNewReview({...newReview, userEmail: e.target.value})}
+                      required
+                    />
+                  </div>
+                </div>
+                
+                <div className="form-group">
+                  <label>Rating:</label>
+                  <div className="rating-input">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <button
+                        key={star}
+                        type="button"
+                        className={`star-btn ${star <= newReview.rating ? 'active' : ''}`}
+                        onClick={() => setNewReview({...newReview, rating: star})}
+                      >
+                        ★
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="form-group">
+                  <label>Comment:</label>
+                  <textarea
+                    value={newReview.comment}
+                    onChange={(e) => setNewReview({...newReview, comment: e.target.value})}
+                    required
+                    rows="4"
+                  />
+                </div>
+                
+                <button type="submit" className="submit-review-btn">
+                  Submit Review
+                </button>
+              </form>
+            </div>
+          )}
+
           {reviews.length > 0 ? (
             <div className="reviews-grid">
               {reviews.map((review) => (
